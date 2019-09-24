@@ -1,2 +1,2 @@
-# NccuBigDataAnalyticsProject
-Nccu Big Data Analytics Project
+﻿# 大數據分析
+大數據分析
