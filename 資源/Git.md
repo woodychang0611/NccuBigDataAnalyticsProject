@@ -1,4 +1,4 @@
-﻿#Git 相關資訊
+﻿# Git 相關資訊
 
 ## 與其它開發者的互動 - 使用 Pull Request（PR）
 https://gitbook.tw/chapters/github/pull-request.html
