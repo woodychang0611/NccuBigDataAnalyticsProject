@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn import svm
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.naive_bayes import MultinomialNB 
+from sklearn.naive_bayes import MultinomialNB
 from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 
@@ -51,7 +51,7 @@ for key  in models:
   scores = cross_val_score(model, X, Y, cv=5)
   mean_score = np.mean(scores)
   print(f'Scores: {scores}')
-  print(f'Mean Scors: {mean_score}')
+  print(f'Mean Score: {mean_score}')
   predict_string = 'This is a book'
   predict_result = model.predict(vectorizer.transform([predict_string]))
   print (f'Predict result for "{predict_string}" is "{predict_result[0]}"')
