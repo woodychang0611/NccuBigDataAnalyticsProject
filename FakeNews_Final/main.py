@@ -28,7 +28,7 @@ print (classification_report(y_test, y_test_predictions))
 print(y_test.shape)
 print(y_test_predictions.shape)
 #Not sure if this is correct to map score 
-y_score = y_test_predict_probabilities[:1,]
+y_score = y_test_predict_probabilities[:,1]
 false_positive_rate, true_positive_rate, thresholds = roc_curve(y_test, y_score)
 roc_auc = auc(false_positive_rate, true_positive_rate)
 # Plotting
