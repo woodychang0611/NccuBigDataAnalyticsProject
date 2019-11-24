@@ -8,7 +8,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 def process_folder(folder,has_label=False):
     try:
         tweets_id = os.path.basename(folder)
-        source_tweets = os.path.join(folder,f'.\\source-tweets\\{tweets_id}.json')
+        source_tweets = os.path.join(folder,f'./source-tweets/{tweets_id}.json')
         with open(source_tweets) as json_file:
             data = json.load(json_file)
             text = data['text']
@@ -21,8 +21,9 @@ def process_folder(folder,has_label=False):
                 hash['is_rumour'] = label_map[data['is_rumour']]
         return hash
 
-    except:
+    except Exception as e:
         print (f'Process {folder} failed')
+        print (f'exception {e}')
         return None
 
 class Preprocessor:
@@ -32,7 +33,7 @@ class Preprocessor:
     def load_training_data(self,src,limit: int=None):
         tweets_data=[]
         print(f'load data src:{src}, limit:{limit}')
-        source_folder_pattern = f'{src}\\*\\*\\*'
+        source_folder_pattern = f'{src}/*/*/*'
         source_folders = glob.glob(source_folder_pattern)
         random.shuffle(source_folders)
         for folder in source_folders[:limit]:
@@ -47,7 +48,7 @@ class Preprocessor:
     def load_testing_data(self,src,limit: int=None,hasLabel=False):
         tweets_data=[]
         print(f'load data src:{src}, limit:{limit}')
-        source_folder_pattern = f'{src}\\*\\*\\*'
+        source_folder_pattern = f'{src}/*/*/*'
         source_folders = glob.glob(source_folder_pattern)
         random.shuffle(source_folders)
         for folder in source_folders[:limit]:
@@ -60,5 +61,4 @@ class Preprocessor:
         if (hasLabel):
             label_dataframe = tweets_dataframe['is_rumour']
             return vectorized_dataframe,label_dataframe
-
         return vectorized_dataframe
