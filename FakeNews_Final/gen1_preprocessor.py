@@ -49,7 +49,7 @@ class Preprocessor:
         vectorized_dataframe = self.vectorizer.fit_transform(tweets_dataframe['text'])
         label_dataframe = tweets_dataframe['is_rumour']
         if(self.pca_n_components!=None):
-            self.pca = PCA(n_components=pca_n_components)
+            self.pca = PCA(n_components=self.pca_n_components)
             vectorized_dataframe= self.pca.fit_transform(vectorized_dataframe.toarray())
         return vectorized_dataframe,label_dataframe
     def load_testing_data(self,src,limit: int=None,hasLabel=False):
