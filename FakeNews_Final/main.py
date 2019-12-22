@@ -7,34 +7,27 @@ from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import classification_report
 import matplotlib.pyplot as plt
 
-preprocessor = Preprocessor(use_pca=True)
+preprocessor = Preprocessor(pca_n_components=1000)
 text_classifier = Classifier()
 traning_set_path = os.path.join((os.path.dirname(__file__)),"training")
 testing_set_path = os.path.join((os.path.dirname(__file__)),"training")
-
 print (f'Traning Set:{traning_set_path}')
 print (f'Testing Set:{testing_set_path}')
 
 
 x,y = preprocessor.load_training_data(traning_set_path,limit=None)
-test_count = 500
-test_data,y_test = x[:test_count],y[:test_count]
-x,y =x[test_count:],y[test_count:]
-#test_data,y_test = preprocessor.load_testing_data(testing_set_path,limit=None,hasLabel=True)
-
-print(x.shape)
-#exit(0)
+x_test,y_test = preprocessor.load_testing_data(testing_set_path,limit=100,hasLabel=True)
 
 
 text_classifier.fit(x,y)
-y_test_predictions = text_classifier.predict(test_data)
-y_test_predict_probabilities = text_classifier.predict_proba(test_data)
+y_test_predictions = text_classifier.predict(x_test)
+y_test_predict_probabilities = text_classifier.predict_proba(x_test)
 
 count=0
 print ('Accuracy:',(y_test_predictions == y_test).sum().astype(float)/(y_test.shape[0]))
 print ('Classification report:')
 print (classification_report(y_test, y_test_predictions))
-#Not sure if this is correct to map score 
+
 y_score = y_test_predict_probabilities[:,1]
 false_positive_rate, true_positive_rate, thresholds = roc_curve(y_test, y_score)
 roc_auc = auc(false_positive_rate, true_positive_rate)
