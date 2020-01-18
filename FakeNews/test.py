@@ -56,3 +56,4 @@ for key  in models:
   predict_result = model.predict(vectorizer.transform([predict_string]))
   print (f'Predict result for "{predict_string}" is "{predict_result[0]}"')
   print('='*80)
+
