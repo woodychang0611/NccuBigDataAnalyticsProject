@@ -125,7 +125,6 @@ print(f'Cross validation score: {np.mean(score["test_score"])}')
 testing_path = os.path.join(current_path,"source_tweets_final.txt")
 testing_dataframe = pd.read_csv(testing_path,sep='\t',header=None,names=['index','text'])
 x_testing = vectorizer.transform(testing_dataframe['text'])
-print (testing_dataframe['index'])
 #Test Model
 y_testing = model.predict(x_testing)
 print(f'rummor rate: {np.sum(y_testing)/len(y_testing)}')
